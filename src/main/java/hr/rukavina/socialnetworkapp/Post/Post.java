@@ -5,12 +5,14 @@ public class Post {
     private String title;
     private String imageUrl;
     private String text;
+    private Integer rating;
 
-    public Post(Long id, String title, String imageUrl, String text) {
+    public Post(Long id, String title, String imageUrl, String text, Integer rating) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.text = text;
+        this.rating = rating;
     }
 
     public Post() {}
@@ -45,5 +47,13 @@ public class Post {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }

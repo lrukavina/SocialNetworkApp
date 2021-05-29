@@ -1,13 +1,31 @@
 package hr.rukavina.socialnetworkapp.Post;
 
-public class PostDTO {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
+
+public class PostCommand {
+
     private Long id;
+
+    @NotBlank(message = "Title must not be empty")
     private String title;
+
+    @NotNull(message = "Image url must be entered")
     private String imageUrl;
+
+    @NotBlank(message = "Text must not be empty")
     private String text;
+
+    @NotNull(message = "Rating must be entered")
     private Integer rating;
 
-    public PostDTO(Long id, String title, String imageUrl, String text, Integer rating) {
+    public PostCommand(Long id,
+                       @NotBlank(message = "Title must not be empty") String title,
+                       @NotNull(message = "Image url must be entered") String imageUrl,
+                       @NotBlank(message = "Text must not be empty") String text,
+                       @NotNull(message = "Rating must be entered") Integer rating) {
+
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
