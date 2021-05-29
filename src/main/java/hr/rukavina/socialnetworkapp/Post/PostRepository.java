@@ -40,6 +40,7 @@ public class PostRepository implements PostRepositoryInterface{
         Post post = new Post();
         post.setId(rs.getLong("id"));
         post.setTitle(rs.getString("title"));
+        post.setImageUrl(rs.getString("image_url"));
         post.setText(rs.getString("post_text"));
         return post;
     }

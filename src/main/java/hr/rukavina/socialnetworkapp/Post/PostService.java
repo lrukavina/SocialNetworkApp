@@ -26,6 +26,6 @@ public class PostService implements PostServiceInterface{
     }
 
     public PostDTO mapPostToDTO(final Post post){
-        return new PostDTO(post.getId(), post.getTitle(), post.getText());
+        return new PostDTO(post.getId(), post.getTitle(), post.getImageUrl(), post.getText());
     }
 }
