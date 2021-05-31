@@ -2,7 +2,6 @@ package hr.rukavina.socialnetworkapp.Post;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 
 public class PostCommand {
 
@@ -20,17 +19,22 @@ public class PostCommand {
     @NotNull(message = "Rating must be entered")
     private Integer rating;
 
+    @NotNull(message = "Author must be entered")
+    private String author;
+
     public PostCommand(Long id,
                        @NotBlank(message = "Title must not be empty") String title,
                        @NotNull(message = "Image url must be entered") String imageUrl,
                        @NotBlank(message = "Text must not be empty") String text,
-                       @NotNull(message = "Rating must be entered") Integer rating) {
+                       @NotNull(message = "Rating must be entered") Integer rating,
+                       @NotNull(message = "Author must be entered") String author) {
 
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.text = text;
         this.rating = rating;
+        this.author = author;
     }
 
     public Long getId() {
@@ -71,5 +75,13 @@ public class PostCommand {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

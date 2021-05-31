@@ -6,13 +6,15 @@ public class PostDTO {
     private String imageUrl;
     private String text;
     private Integer rating;
+    private String author;
 
-    public PostDTO(Long id, String title, String imageUrl, String text, Integer rating) {
+    public PostDTO(Long id, String title, String imageUrl, String text, Integer rating, String author) {
         this.id = id;
         this.title = title;
         this.imageUrl = imageUrl;
         this.text = text;
         this.rating = rating;
+        this.author = author;
     }
 
     public Long getId() {
@@ -53,5 +55,13 @@ public class PostDTO {
 
     public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

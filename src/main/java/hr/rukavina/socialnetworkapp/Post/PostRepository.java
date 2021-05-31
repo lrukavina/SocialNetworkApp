@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Primary
@@ -27,7 +29,7 @@ public class PostRepository implements PostRepositoryInterface{
 
     @Override
     public List<Post> findAll() {
-        return jdbc.query("SELECT * FROM POST", this::mapRowToPost);
+        return jdbc.query("SELECT * FROM POST order by id desc", this::mapRowToPost);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class PostRepository implements PostRepositoryInterface{
     }
 
     @Override
-    public Optional<Post> upvotePost(Post post) {
+    public Optional<Post> reactOnPost(Post post) {
         Optional<Post> checkedPost = this.findById(post.getId().toString());
 
         if(checkedPost.isPresent()){
@@ -51,6 +53,23 @@ public class PostRepository implements PostRepositoryInterface{
         }
     }
 
+    @Override
+    public long savePostDetails(Post post) {
+        Map<String, Object> values = new HashMap<>();
+        values.put("title", post.getTitle());
+        values.put("image_url", post.getImageUrl());
+        values.put("post_text", post.getText());
+        values.put("rating", post.getRating());
+        values.put("author",post.getAuthor());
+        return postInserter.executeAndReturnKey(values).longValue();
+    }
+
+    @Override
+    public Optional<Post> saveNewPost(Post post) {
+        post.setId(savePostDetails(post));
+        return Optional.of(post);
+    }
+
 
     public Post mapRowToPost(ResultSet rs, int rowNum) throws SQLException{
         Post post = new Post();
@@ -59,6 +78,9 @@ public class PostRepository implements PostRepositoryInterface{
         post.setImageUrl(rs.getString("image_url"));
         post.setText(rs.getString("post_text"));
         post.setRating(rs.getInt("rating"));
+        post.setAuthor(rs.getString("author"));
         return post;
     }
+
+
 }
