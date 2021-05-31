@@ -57,6 +57,7 @@ public class PostService implements PostServiceInterface{
         if(postCommand.getAuthor().equals("anonymous")){
             Random rand = new Random();
             Integer authorNum = rand.nextInt();
+            if(authorNum < 0) authorNum *= -1;
             post.setAuthor("anonymous"+authorNum.toString());
         }
         else {

@@ -14,3 +14,8 @@ INSERT INTO post(title,image_url, post_text, rating, author) VALUES
     winning to the lives of millions.Football management is all about love and passion for football.
     But to become really successful,you also need to know your team, set winning tactics,
     and outsmart your competitors. ..',0,'anonymous223');
+
+
+INSERT INTO comment(author, content, post_id) VALUES
+    ('anonymous223', 'This is my sample comment', 1),
+    ('anonymous223', 'This is my second sample comment', 1);
