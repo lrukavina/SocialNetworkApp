@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -26,6 +28,21 @@ public class CommentRepository implements CommentRepositoryInterface {
     @Override
     public List<Comment> findByPostId(String postId) {
         return jdbc.query("SELECT * FROM COMMENT WHERE POST_ID = ?",this::mapRowToComment, postId);
+    }
+
+    @Override
+    public Optional<Comment> saveNewComment(Comment comment) {
+        comment.setId(saveCommentDetails(comment));
+        return Optional.of(comment);
+    }
+
+    @Override
+    public long saveCommentDetails(Comment comment) {
+        Map<String, Object> values = new HashMap<>();
+        values.put("author", comment.getAuthor());
+        values.put("content",comment.getContent());
+        values.put("post_id",comment.getPostId());
+        return commentInserter.executeAndReturnKey(values).longValue();
     }
 
 

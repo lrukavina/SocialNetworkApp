@@ -18,4 +18,5 @@ INSERT INTO post(title,image_url, post_text, rating, author) VALUES
 
 INSERT INTO comment(author, content, post_id) VALUES
     ('anonymous223', 'This is my sample comment', 1),
-    ('anonymous223', 'This is my second sample comment', 1);
+    ('anonymous223', 'This is my second sample comment', 1),
+    ('Luka Rukavina', 'Nice post man! Looking forward to the next one :D', 2);
