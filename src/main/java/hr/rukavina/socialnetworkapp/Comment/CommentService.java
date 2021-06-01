@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +36,15 @@ public class CommentService implements CommentServiceInterface {
     public Comment mapCommentToEntity(final CommentCommand commentCommand){
         Comment comment = new Comment();
         comment.setId(commentCommand.getId());
-        comment.setAuthor(commentCommand.getAuthor());
+        if(commentCommand.getAuthor().equals("anonymous")){
+            Random rand = new Random();
+            Integer authorNum = rand.nextInt();
+            if(authorNum < 0) authorNum *= -1;
+            comment.setAuthor("anonymous"+authorNum.toString());
+        }
+        else {
+            comment.setAuthor(commentCommand.getAuthor());
+        }
         comment.setContent(commentCommand.getContent());
         comment.setPostId(commentCommand.getPostId());
         return comment;
